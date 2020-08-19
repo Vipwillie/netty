@@ -124,7 +124,7 @@ public class ChannelOption<T> extends AbstractConstant<ChannelOption<T>> {
     public static final ChannelOption<Integer> IP_MULTICAST_TTL = valueOf("IP_MULTICAST_TTL");
     public static final ChannelOption<Boolean> IP_MULTICAST_LOOP_DISABLED = valueOf("IP_MULTICAST_LOOP_DISABLED");
 
-    public static final ChannelOption<Boolean> TCP_NODELAY = valueOf("TCP_NODELAY");
+    public static final ChannelOption<Boolean>  TCP_NODELAY = valueOf("TCP_NODELAY");
 
     @Deprecated
     public static final ChannelOption<Boolean> DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION =
