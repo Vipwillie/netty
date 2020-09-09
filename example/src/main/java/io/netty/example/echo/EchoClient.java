@@ -51,6 +51,7 @@ public final class EchoClient {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
+            //指定EventLoopGroup以处理客户端事件
             b.group(group)
              .channel(NioSocketChannel.class)
              .option(ChannelOption.TCP_NODELAY, true)
@@ -62,7 +63,7 @@ public final class EchoClient {
                          p.addLast(sslCtx.newHandler(ch.alloc(), HOST, PORT));
                      }
                      //p.addLast(new LoggingHandler(LogLevel.INFO));
-                     p.addLast(new EchoClientHandler());
+                     p.addLast(new MyEchoClientHandler());
                  }
              });
 
@@ -83,7 +84,7 @@ public final class EchoClient {
             // Wait until the connection is closed.
             f.channel().closeFuture().sync();
         } finally {
-            // Shut down the event loop to terminate all threads.
+            // Shut down the event loop to terminate all threads. 关闭线程池并且释放所有的资源
             group.shutdownGracefully();
         }
     }

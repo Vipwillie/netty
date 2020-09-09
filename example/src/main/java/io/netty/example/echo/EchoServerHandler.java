@@ -15,9 +15,13 @@
  */
 package io.netty.example.echo;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
+
+import java.nio.charset.Charset;
 
 /**
  * Handler implementation for the echo server.
@@ -25,6 +29,14 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 @Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
+    //在到服务器的连接已经建立之后将被调用
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("开始建立一个连接");
+        super.channelActive(ctx);
+    }
+
+    //当从服务器接收到一条消息时被调用
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ctx.write(msg);
@@ -35,6 +47,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ctx.flush();
     }
 
+    //在处理过程中引发异常时被调用
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.
